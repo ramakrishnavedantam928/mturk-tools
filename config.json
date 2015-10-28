@@ -1,3 +1,5 @@
 {
-				"num_assign": 10
+				"output_dir": "../data/outputs",
+				"exp_list": "note.json",
+				"output_file": "real"
 }

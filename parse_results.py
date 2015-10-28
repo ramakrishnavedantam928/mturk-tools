@@ -6,12 +6,19 @@ from string import digits
 import json
 import pickle # python pickle
 
-
-output_dir = '../data/outputs'
-output_file = 'Batch_113098_batch_results.csv'
-exp_name = output_file.split('.')[0]
-
 config = json.load(open('config.json', 'r'))
+
+output_dir = config['output_dir']
+print(os.path.join(output_dir, config['exp_list']))
+expms = json.load(open(os.path.join(output_dir, config['exp_list']), 'r'))
+try:
+    output_file = expms[config['output_file']]
+except KeyError:
+    print('make sure %s file is updated in %s'%(config['exp_list'],
+                                                config['output_dir']))
+    sys.exit()
+
+exp_name = output_file.split('.')[0]
 
 with open(os.path.join(output_dir, output_file), 'r') as FILE:
     reader = csv.reader(FILE)
